@@ -3,7 +3,7 @@
 _Last updated: 2026-09-17_
 
 ## Where it stands
-One-page towing site built and pushed to GitHub Pages (URL in CHANGELOG). Not yet on its own domain. Not yet shown to Danny.
+One-page towing site built and pushed to GitHub Pages at https://twomeypcrepair.github.io/dannystowing.net/. Not yet on its own domain. Not yet shown to Danny. GATES.md: 6/6 met on 2026-09-17.
 
 ## Facts carried over from dannysautobody.net (verified 2026-09-17 by reading the live site)
 - Phone (870) 994-2701, email dannysauto@centurytel.net, 7 Little Creek Cir, Ash Flat AR 72513, Mon to Fri 9 AM to 5 PM.

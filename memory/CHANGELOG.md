@@ -20,6 +20,7 @@ dannystowing.net/
 ## Changes (newest first)
 
 ### 2026-09-17 — Initial build
+- Live at https://twomeypcrepair.github.io/dannystowing.net/ (public repo twomeypcrepair/dannystowing.net, Pages from main root). Custom domain not yet set.
 - One-page site: header with phone, hero (headline + call button + red D), what we do (4 cells), where we go (8 towns), about band (body shop closed, towing only), contact (phone/email/address/hours), footer, mobile fixed call bar.
 - AutomotiveBusiness JSON-LD with NAP, hours and areaServed.
 - Gate script `scripts/check-site.mjs` (structure, copy, nap, skeleton, live) and `GATES.md`.
