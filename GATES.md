@@ -25,7 +25,7 @@ Scope: a one-page static GitHub Pages site for Danny's Towing (towing only, body
   EVIDENCE: automatic-evidence=v1; definition-sha256=90d2b7cb7da0603a9b97f737d35b5fce3db0f2377f2f098b50b779e4020949fc; exit=0; EXPECT=matched; output-sha256=e90cad503481fb2322f543ac341cef2b777486d8fe475d2d00e19e734eb904bb; output-bytes=22; shell=C:\WINDOWS\system32\cmd.exe; cwd=C:\TwomeyRepo\websites\dannystowing.net; path=d9662ebded43/37 entries
 
 - [x] G5: page renders at 375px and desktop with no horizontal overflow, nav on one line, hero CTA visible without scrolling, no console errors
-  EVIDENCE: 2026-09-17 manual review in the app browser over http://localhost:8765. 375x812: scrollWidth 375 = innerWidth, fixed call bar display block, hero CTA bottom 419px of 812. 1024x768 and 1280x800: h1 2 lines, nav 64px one line, CTA bottom 425px/477px, scrollWidth = viewport minus scrollbar. Console errors: none. Fonts loaded: Archivo, Archivo Black, IBM Plex Mono.
+  EVIDENCE: 2026-09-17 v2 review via headless Chrome DevTools emulation (scratchpad shot.mjs). 1440x900: h1 2 lines, hero CTA bottom 670px, nav 642px one line, scrollWidth 1425 = viewport minus scrollbar. 820 tablet: h1 2 lines, nav children at 106-256 / 280-545 / 569-722 (no overlap), scrollWidth 820, no empty bento cell. 390 phone: scrollWidth 390, call pill fixed, hero CTA bottom 462px of 844. Console/runtime errors: none. All 4 images load; fonts Outfit, Geist, Geist Mono loaded.
 
 - [x] G6: site is live on GitHub Pages: the Pages URL returns 200 and serves the towing page with the phone link
   CHECK: node scripts/check-site.mjs live https://twomeypcrepair.github.io/dannystowing.net/

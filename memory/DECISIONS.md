@@ -6,8 +6,12 @@ The old site was WordPress for a one-page brochure. The towing business needs on
 ## 2026-09-17 — No contact form
 The conversion for a tow company is a phone call, not a form someone reads Monday. Every CTA is a tel: link. A fixed call bar sits at the bottom on phones. Static hosting has no backend anyway; if a form is wanted later, Formspree or a Cloudflare Worker.
 
-## 2026-09-17 — Look: Swiss industrial print, light only
-Paper #F4F4F0, ink #111, one red #FF0000 (the existing D mark is pure red; kept it so the mark and the accent match). Archivo Black display, Archivo body, IBM Plex Mono labels, zero border-radius, no shadows, no animation. Picked over the glassy/premium direction because the brand is a red block letter and the customer is standing on a road shoulder. Light theme locked; no dark mode variant (one substrate per the brutalist rule).
+## 2026-09-17 — Look v2: dark, night-on-the-shoulder (supersedes the v1 print look)
+Vash asked for a high-end look after v1. v2: near-black #070606, one red #FF2B2B, Outfit 800 display, Geist body, Geist Mono labels. Floating glass pill nav, double-bezel cards (28px shell, 22px core), pill buttons with the arrow in its own circle, bento services grid with two photos and one red CTA cell, one marquee for the towns, scroll reveals via IntersectionObserver. Dark theme locked, no light variant. Shape rule: pills for controls, 28/22 shells for cards, nothing else rounded.
+v1 (paper, ink, Archivo Black, zero radius) lives in git history at commit 005c196 if the flat look is ever wanted back.
+
+## 2026-09-17 — Photos are Unsplash hotlinks until Danny supplies his own
+No photos of Danny's trucks exist. Three Unsplash photos (license allows commercial use, credit in the footer): red Ford wrecker by ftodne (hero), night pickup by sebastiaanstam (bento), roadside red sedan by hectoroconnor (bento). Picked because none show another company's name on the truck. Swap for real photos of Danny's rig as soon as there are any; keep the same aspect ratios (11:13 hero, 3:4 tall cell, 9:7 wide cell).
 
 ## 2026-09-17 — Keep the old name on the page once
 "You might know us as Danny's Auto Body" stays in the about band. Locals know that name, and it carries the search equity. No other body-shop wording anywhere; the copy check enforces it.
