@@ -1,0 +1,124 @@
+/* Danny's Towing. Swiss industrial print: paper, ink, one red. No radius, no shadows, no motion. */
+:root {
+  --paper: #F4F4F0;
+  --ink: #111111;
+  --red: #FF0000;
+  --mute: #55554F;
+  --display: "Archivo Black", "Arial Black", sans-serif;
+  --body: "Archivo", Arial, sans-serif;
+  --mono: "IBM Plex Mono", "Courier New", monospace;
+  --pad: clamp(1rem, 4vw, 3rem);
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 1.0625rem;
+  line-height: 1.5;
+}
+a { color: inherit; }
+img { display: block; }
+h1, h2, h3 {
+  font-family: var(--display);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+  line-height: 0.92;
+  margin: 0;
+}
+h2 { font-size: clamp(2rem, 5vw, 3.5rem); margin-bottom: 1.5rem; }
+h3 { font-size: 1.25rem; letter-spacing: -0.01em; margin-bottom: 0.5rem; }
+p { margin: 0 0 1rem; max-width: 42ch; }
+
+/* header */
+.top {
+  position: sticky; top: 0; z-index: 10;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 64px; padding: 0 var(--pad);
+  background: var(--paper);
+  border-bottom: 2px solid var(--ink);
+}
+.brand { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; font-family: var(--display); font-size: 1.125rem; text-transform: uppercase; letter-spacing: -0.02em; white-space: nowrap; }
+.top-call { font-family: var(--mono); font-weight: 500; font-size: 1rem; text-decoration: none; padding: 0.5rem 0.75rem; border: 2px solid var(--ink); white-space: nowrap; }
+.top-call:hover { background: var(--ink); color: var(--paper); }
+
+/* hero */
+.hero {
+  display: grid; grid-template-columns: 1fr 1fr; align-items: center;
+  min-height: calc(100dvh - 64px);
+  padding: 2rem var(--pad) 3rem;
+  border-bottom: 2px solid var(--ink);
+  overflow: hidden;
+}
+.hero h1 { font-size: clamp(2.5rem, 6.5vw, 5.5rem); margin-bottom: 1.25rem; }
+.hero p { font-size: 1.25rem; margin-bottom: 2rem; }
+.hero-mark {
+  font-family: var(--display); color: var(--red);
+  font-size: clamp(14rem, 44vw, 38rem); line-height: 0.75;
+  justify-self: end; margin-right: -0.08em; user-select: none;
+}
+.btn {
+  display: inline-block; text-decoration: none;
+  font-family: var(--display); text-transform: uppercase; font-size: 1.125rem;
+  background: var(--ink); color: var(--paper);
+  padding: 1rem 1.5rem; border: 2px solid var(--ink);
+  white-space: nowrap;
+}
+.btn:hover { background: var(--red); border-color: var(--red); }
+.btn:active, .call-bar:active, .top-call:active { transform: translateY(1px); }
+
+/* sections */
+section { padding: 4rem var(--pad); }
+.services { border-bottom: 2px solid var(--ink); }
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: var(--ink); border: 2px solid var(--ink); }
+.grid > div { background: var(--paper); padding: 2rem; }
+.grid p { margin: 0; color: var(--mute); }
+
+.areas { border-bottom: 2px solid var(--ink); }
+.towns {
+  list-style: none; margin: 1.5rem 0 0; padding: 0;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px;
+  background: var(--ink); border: 2px solid var(--ink);
+}
+.towns li { background: var(--paper); padding: 1rem 1.25rem; font-family: var(--mono); text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.9rem; }
+
+.about { background: var(--ink); color: var(--paper); border-top: 8px solid var(--red); }
+.about p { font-family: var(--display); text-transform: uppercase; letter-spacing: -0.02em; line-height: 1.05; font-size: clamp(1.5rem, 3.4vw, 2.75rem); max-width: 26ch; margin: 0; }
+
+.contact dl { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; margin: 0; background: var(--ink); border: 2px solid var(--ink); }
+.contact dl > div { background: var(--paper); padding: 1.5rem; min-width: 0; }
+.contact dt { font-family: var(--mono); text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.8rem; color: var(--mute); margin-bottom: 0.5rem; }
+.contact dd { margin: 0; font-weight: 600; overflow-wrap: anywhere; }
+.contact a { text-decoration-thickness: 2px; text-underline-offset: 3px; }
+.contact a:hover { color: var(--red); }
+
+footer {
+  display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
+  padding: 1.5rem var(--pad);
+  border-top: 2px solid var(--ink);
+  font-family: var(--mono); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.06em;
+}
+
+/* mobile call bar: the whole point of the page is the phone number */
+.call-bar {
+  display: none; position: fixed; left: 0; right: 0; bottom: 0; z-index: 10;
+  background: var(--red); color: #fff; text-decoration: none; text-align: center;
+  font-family: var(--display); text-transform: uppercase; font-size: 1.25rem;
+  padding: 1rem; border-top: 2px solid var(--ink);
+}
+
+@media (max-width: 767px) {
+  .top-call { display: none; }
+  .call-bar { display: block; }
+  footer { padding-bottom: 5.5rem; }
+  .hero { grid-template-columns: 1fr; min-height: 0; padding-top: 2.5rem; }
+  .hero-mark { font-size: 10rem; justify-self: start; margin: 1.5rem 0 0 -0.06em; }
+  .grid, .contact dl { grid-template-columns: 1fr; }
+  .towns { grid-template-columns: 1fr 1fr; }
+  section { padding: 3rem var(--pad); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .btn:active, .call-bar:active, .top-call:active { transform: none; }
+}

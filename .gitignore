@@ -1,0 +1,19 @@
+# Local Claude instructions (public repo)
+CLAUDE.md
+.claude/
+.unlazy/
+.unlazy-hook-state.json
+
+# Secrets, never here
+.env
+.env.*
+*.pem
+*.key
+
+# OS / editor
+Thumbs.db
+desktop.ini
+.DS_Store
+.idea/
+.vscode/
+*.swp
