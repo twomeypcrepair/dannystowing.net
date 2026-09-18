@@ -50,9 +50,9 @@ Scope: a one-page static GitHub Pages site for Danny's Towing (towing only, body
 - [x] G10: keyboard: first Tab stop is the skip link, every Tab stop shows a visible focus ring and is at least 24x24, every focusable element is reached
   CHECK: node scripts/audit.mjs keyboard https://twomeypcrepair.github.io/dannystowing.net/
   EXPECT: keyboard check passed
-  EVIDENCE: automatic-evidence=v1; definition-sha256=7fe5b8bc7897515af483e01107b30575442eac2f6e0c515a7d7022323767411c; exit=0; EXPECT=matched; output-sha256=1dcb22a81241e4987c264c326b56830c2884cac5c0563505f1a09b8f87938384; output-bytes=1016; shell=C:\WINDOWS\system32\cmd.exe; cwd=C:\TwomeyRepo\websites\dannystowing.net; path=d9662ebded43/37 entries
+  EVIDENCE: automatic-evidence=v1; definition-sha256=7fe5b8bc7897515af483e01107b30575442eac2f6e0c515a7d7022323767411c; exit=0; EXPECT=matched; output-sha256=c4b6a3090d3247d97f130cbc2d95226ee88f50c59720dac77153d6d175114ccd; output-bytes=1014; shell=C:\WINDOWS\system32\cmd.exe; cwd=C:\TwomeyRepo\websites\dannystowing.net; path=d9662ebded43/37 entries
 
 - [x] G11: Lighthouse mobile on the live page scores seo 100, accessibility 100, best-practices at least 90, performance at least 85 (run the checker with --timeout 600)
   CHECK: node scripts/audit.mjs lighthouse https://twomeypcrepair.github.io/dannystowing.net/
   EXPECT: lighthouse check passed
-  EVIDENCE: automatic-evidence=v1; definition-sha256=e82fa2e0deafc09e0b9349e4cee2b70c693ec6fcf2ea5ccbc4a75bea22b1ae61; exit=0; EXPECT=matched; output-sha256=3f062291de46f8ac70bf05738d91fb5137319324e31f257adfdee50aabd3b7bc; output-bytes=1679; shell=C:\WINDOWS\system32\cmd.exe; cwd=C:\TwomeyRepo\websites\dannystowing.net; path=d9662ebded43/37 entries
+  EVIDENCE: automatic-evidence=v1; definition-sha256=e82fa2e0deafc09e0b9349e4cee2b70c693ec6fcf2ea5ccbc4a75bea22b1ae61; exit=0; EXPECT=matched; output-sha256=d804a3f8db2c2782d0fcd17e64eb1467bc277251631e5e875cd9701f581554c9; output-bytes=1680; shell=C:\WINDOWS\system32\cmd.exe; cwd=C:\TwomeyRepo\websites\dannystowing.net; path=d9662ebded43/37 entries
