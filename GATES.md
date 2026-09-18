@@ -55,14 +55,14 @@ Scope: a one-page static GitHub Pages site for Danny's Towing (towing only, body
 - [x] G11: Lighthouse mobile on the live page scores seo 100, accessibility 100, best-practices at least 90, performance at least 85 (run the checker with --timeout 600)
   CHECK: node scripts/audit.mjs lighthouse https://twomeypcrepair.github.io/dannystowing.net/
   EXPECT: lighthouse check passed
-  EVIDENCE: automatic-evidence=v1; definition-sha256=e82fa2e0deafc09e0b9349e4cee2b70c693ec6fcf2ea5ccbc4a75bea22b1ae61; exit=0; EXPECT=matched; output-sha256=d804a3f8db2c2782d0fcd17e64eb1467bc277251631e5e875cd9701f581554c9; output-bytes=1680; shell=C:\WINDOWS\system32\cmd.exe; cwd=C:\TwomeyRepo\websites\dannystowing.net; path=d9662ebded43/37 entries
+  EVIDENCE: automatic-evidence=v1; definition-sha256=e82fa2e0deafc09e0b9349e4cee2b70c693ec6fcf2ea5ccbc4a75bea22b1ae61; exit=0; EXPECT=matched; output-sha256=2a871cb9d140c4d2ad5a266df06066b9a3332f1968ba9c45501aa7928dad4391; output-bytes=1711; shell=C:\WINDOWS\system32\cmd.exe; cwd=C:\TwomeyRepo\websites\dannystowing.net; path=d9662ebded43/37 entries
 
-- [ ] G12: holiday greeting logic: 16 holidays, fixed and floating dates match the real calendar for 2026 through 2028, windows open and close on the right days, overlapping windows pick the nearest holiday, Memorial Day and Veterans Day never say Happy, every greeting passes the copy scanner and fits the pill, placeholder is hidden by default
+- [x] G12: holiday greeting logic: 16 holidays, fixed and floating dates match the real calendar for 2026 through 2028, windows open and close on the right days, overlapping windows pick the nearest holiday, Memorial Day and Veterans Day never say Happy, every greeting passes the copy scanner and fits the pill, placeholder is hidden by default
   CHECK: node scripts/check-site.mjs holidays
   EXPECT: holidays check passed
-  EVIDENCE: pending
+  EVIDENCE: automatic-evidence=v1; definition-sha256=d5d9349bf6ef34d312cae0621aa81cc6c89fb70d5457a6e1445ea093cecad4e3; exit=0; EXPECT=matched; output-sha256=d67cce4b2f4fe47563ae28f6e4d0f9e85cc8d0030859678c6ec6604e66baebb6; output-bytes=22; shell=C:\WINDOWS\system32\cmd.exe; cwd=C:\TwomeyRepo\websites\dannystowing.net; path=d9662ebded43/37 entries
 
-- [ ] G13: holiday pill in a real browser on the live page: shows Merry Christmas on a previewed Dec 25, stays hidden on a previewed Aug 1, sober wording on Memorial Day, no overflow at 390 or 1440, zero axe violations while showing
+- [x] G13: holiday pill in a real browser on the live page: shows Merry Christmas on a previewed Dec 25, stays hidden on a previewed Aug 1, sober wording on Memorial Day, no overflow at 390 or 1440, zero axe violations while showing
   CHECK: node scripts/audit.mjs holiday https://twomeypcrepair.github.io/dannystowing.net/
   EXPECT: holiday banner check passed
-  EVIDENCE: pending
+  EVIDENCE: automatic-evidence=v1; definition-sha256=f874b9f27741a26c0ad650d8f303d476d6290759514f729cf1d99a2485f3d8a8; exit=0; EXPECT=matched; output-sha256=aee643ab3bb2f7ec30005613849e78bb9f91d21d6df17a98dcd9433ae82855f7; output-bytes=669; shell=C:\WINDOWS\system32\cmd.exe; cwd=C:\TwomeyRepo\websites\dannystowing.net; path=d9662ebded43/37 entries
