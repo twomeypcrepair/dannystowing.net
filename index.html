@@ -85,7 +85,68 @@
 
 <section class="hero" aria-labelledby="hero-title">
   <div class="hero-copy">
-    <span class="chip reveal">Ash Flat, Arkansas</span>
+    <div class="chips reveal">
+      <span class="chip">Ash Flat, Arkansas</span>
+      <span class="chip chip-holiday" id="holiday" hidden></span>
+    </div>
+    <script id="holiday-script">
+    /* Holiday greeting. Dates are computed, nothing to update each year. Preview any day with ?holiday=YYYY-MM-DD */
+    (function (root) {
+      var DAY = 86400000;
+      var NAME = "Danny's Auto";
+      // nth weekday of a month. dow: 0 Sunday to 6 Saturday. n: 1 to 4, or -1 for the last one.
+      function nth(y, m, dow, n) {
+        if (n > 0) { var first = new Date(y, m, 1); return new Date(y, m, 1 + ((dow - first.getDay() + 7) % 7) + (n - 1) * 7); }
+        var last = new Date(y, m + 1, 0); return new Date(y, m, last.getDate() - ((last.getDay() - dow + 7) % 7));
+      }
+      // Gregorian Easter (anonymous algorithm).
+      function easter(y) {
+        var a = y % 19, b = Math.floor(y / 100), c = y % 100, d = Math.floor(b / 4), e = b % 4, f = Math.floor((b + 8) / 25),
+          g = Math.floor((b - f + 1) / 3), h = (19 * a + b - d - g + 15) % 30, i = Math.floor(c / 4), k = c % 4,
+          l = (32 + 2 * e + 2 * i - h - k) % 7, m = Math.floor((a + 11 * h + 22 * l) / 451),
+          month = Math.floor((h + l - 7 * m + 114) / 31), day = ((h + l - 7 * m + 114) % 31) + 1;
+        return new Date(y, month - 1, day);
+      }
+      // before = how many days ahead of the holiday the greeting starts. It always ends at the close of the holiday itself.
+      function list(y) {
+        var happy = function (what) { return "Happy " + what + " from " + NAME + "."; };
+        return [
+          { key: "newyear", date: new Date(y, 0, 1), before: 2, text: happy("New Year") },
+          { key: "mlk", date: nth(y, 0, 1, 3), before: 3, text: "Honoring Dr. King this Martin Luther King Jr. Day." },
+          { key: "valentines", date: new Date(y, 1, 14), before: 3, text: happy("Valentine's Day") },
+          { key: "presidents", date: nth(y, 1, 1, 3), before: 3, text: happy("Presidents Day") },
+          { key: "stpatricks", date: new Date(y, 2, 17), before: 3, text: happy("St. Patrick's Day") },
+          { key: "easter", date: easter(y), before: 3, text: happy("Easter") },
+          { key: "mothers", date: nth(y, 4, 0, 2), before: 3, text: happy("Mother's Day") },
+          { key: "memorial", date: nth(y, 4, 1, -1), before: 3, text: "Remembering those who served this Memorial Day." },
+          { key: "juneteenth", date: new Date(y, 5, 19), before: 3, text: happy("Juneteenth") },
+          { key: "fathers", date: nth(y, 5, 0, 3), before: 3, text: happy("Father's Day") },
+          { key: "july4", date: new Date(y, 6, 4), before: 3, text: happy("Fourth of July") },
+          { key: "labor", date: nth(y, 8, 1, 1), before: 3, text: happy("Labor Day") },
+          { key: "halloween", date: new Date(y, 9, 31), before: 3, text: happy("Halloween") },
+          { key: "veterans", date: new Date(y, 10, 11), before: 3, text: "Thank you, veterans, from " + NAME + "." },
+          { key: "thanksgiving", date: nth(y, 10, 4, 4), before: 6, text: "Happy Thanksgiving. On the road this week? Save our number." },
+          { key: "christmas", date: new Date(y, 11, 25), before: 7, text: "Merry Christmas. On the road this week? Save our number." }
+        ];
+      }
+      // The holiday whose window covers this date, nearest one wins. Null most of the year.
+      function current(now) {
+        var today = new Date(now.getFullYear(), now.getMonth(), now.getDate()), best = null;
+        list(today.getFullYear()).concat(list(today.getFullYear() + 1)).forEach(function (h) {
+          var diff = Math.round((h.date - today) / DAY);
+          if (diff >= 0 && diff <= h.before && (!best || diff < best.diff)) best = { key: h.key, text: h.text, diff: diff };
+        });
+        return best;
+      }
+      root.dannysHoliday = { list: list, current: current };
+      if (root.document) {
+        var q = /[?&]holiday=(\d{4})-(\d{2})-(\d{2})/.exec(root.location.search);
+        var when = q ? new Date(+q[1], +q[2] - 1, +q[3], 12) : new Date();
+        var hit = current(when), el = root.document.getElementById("holiday");
+        if (hit && el) { el.textContent = hit.text; el.hidden = false; }
+      }
+    })(typeof window !== "undefined" ? window : globalThis);
+    </script>
     <h1 id="hero-title" class="reveal" style="--i:1">Broke down? We'll come get you.</h1>
     <p class="lead reveal" style="--i:2">Towing and roadside help out of Ash Flat. Call and we'll send a truck.</p>
     <div class="actions reveal" style="--i:3">

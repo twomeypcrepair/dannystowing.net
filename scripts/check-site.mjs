@@ -1,4 +1,4 @@
-// Gate oracle for GATES.md. Usage: node scripts/check-site.mjs <structure|copy|nap|skeleton|seo|footer|live [url]>
+// Gate oracle for GATES.md. Usage: node scripts/check-site.mjs <structure|copy|nap|skeleton|seo|footer|holidays|live [url]>
 import { readFileSync, existsSync } from "node:fs";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -100,6 +100,42 @@ if (mode === "structure") {
   if (/unsplash/i.test(text(h))) fail("visible page text still mentions Unsplash");
   if (/@ftodne|@sebastiaanstam|@jairph|@hectoroconnor/.test(h)) fail("photographer credit links still present");
   console.log("footer check passed");
+} else if (mode === "holidays") {
+  const code = html().match(/<script id="holiday-script">([\s\S]*?)<\/script>/)?.[1];
+  if (!code) fail("no holiday script in index.html");
+  const vm = await import("node:vm");
+  const sb = {}; sb.window = sb;
+  vm.runInNewContext(code, sb);
+  const api = sb.dannysHoliday;
+  if (!api) fail("holiday script did not export dannysHoliday");
+  // Floating dates taken from the calendar, not from this code.
+  const KNOWN = {
+    2026: { mlk: "1-19", presidents: "2-16", easter: "4-5", mothers: "5-10", memorial: "5-25", fathers: "6-21", labor: "9-7", thanksgiving: "11-26" },
+    2027: { mlk: "1-18", presidents: "2-15", easter: "3-28", mothers: "5-9", memorial: "5-31", fathers: "6-20", labor: "9-6", thanksgiving: "11-25" },
+    2028: { mlk: "1-17", presidents: "2-21", easter: "4-16", mothers: "5-14", memorial: "5-29", fathers: "6-18", labor: "9-4", thanksgiving: "11-23" },
+  };
+  const FIXED = { newyear: "1-1", valentines: "2-14", stpatricks: "3-17", juneteenth: "6-19", july4: "7-4", halloween: "10-31", veterans: "11-11", christmas: "12-25" };
+  for (const [y, floating] of Object.entries(KNOWN)) {
+    const items = api.list(+y);
+    if (items.length !== 16) fail(`${y}: expected 16 holidays, got ${items.length}`);
+    const got = Object.fromEntries(items.map((x) => [x.key, `${x.date.getMonth() + 1}-${x.date.getDate()}`]));
+    for (const [k, v] of Object.entries({ ...FIXED, ...floating })) if (got[k] !== v) fail(`${y} ${k}: computed ${got[k]}, calendar says ${v}`);
+  }
+  const at = (s) => { const [y, m, d] = s.split("-").map(Number); return api.current(new Date(y, m - 1, d, 12))?.key ?? null; };
+  const WINDOWS = [
+    ["2026-12-17", null], ["2026-12-18", "christmas"], ["2026-12-25", "christmas"], ["2026-12-26", null],
+    ["2026-12-30", "newyear"], ["2027-01-01", "newyear"], ["2027-01-02", null],
+    ["2026-02-13", "valentines"], ["2026-02-15", "presidents"], ["2026-06-19", "juneteenth"], ["2026-06-20", "fathers"],
+    ["2026-11-08", "veterans"], ["2026-11-20", "thanksgiving"], ["2026-09-04", "labor"], ["2026-09-08", null], ["2026-08-01", null],
+  ];
+  for (const [day, want] of WINDOWS) if (at(day) !== want) fail(`${day}: showed ${at(day)}, want ${want}`);
+  for (const h of api.list(2026)) {
+    if ((h.key === "memorial" || h.key === "veterans") && /happy/i.test(h.text)) fail(`${h.key} greeting must not say Happy`);
+    const hits = scan(h.text); if (hits.length) fail(`${h.key} text tripped the copy scanner: ${hits}`);
+    if (h.text.length > 70) fail(`${h.key} text is ${h.text.length} chars, too long for the pill`);
+  }
+  if (!/<span class="chip chip-holiday" id="holiday" hidden><\/span>/.test(html())) fail("holiday pill placeholder missing or not hidden by default");
+  console.log("holidays check passed");
 } else if (mode === "live") {
   const url = process.argv[3];
   if (!url) fail("live needs a url");

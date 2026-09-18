@@ -24,3 +24,6 @@ Self-hosting fonts on a one-file site is more files for no gain. Link tag with d
 
 ## 2026-09-18 — Business name is Danny's Auto (legal name)
 Vash confirmed the legal name. Title is "Danny's Auto | Towing in Ash Flat, AR | (870) 994-2701" so the word Towing stays in the title for search. Nav brand, footer, og:site_name, og:title, meta description, JSON-LD name and the 404 page all use Danny's Auto. JSON-LD alternateName lists Danny's Towing and the old Auto Body name. The domain stays dannystowing.net.
+
+## 2026-09-18 — Holiday greetings are computed in the page, not edited by hand
+The customer used to ask for holiday banners to be put up and taken down. Replaced with an inline script that shows a small pill in the hero during each holiday window. Chosen over a scheduled GitHub Action that rewrites the HTML because it has no moving parts and cannot get stuck showing a stale banner. Inline rather than a separate file so there is no extra request and no layout shift. Memorial Day and Veterans Day wording never says Happy. No open or closed claims are made because holiday hours are unknown; add a per-holiday line later if Danny supplies them. Windows: 3 days before through the day for most, 6 for Thanksgiving, 7 for Christmas, Dec 30 through Jan 1 for New Year. When two windows overlap the nearest holiday wins.

@@ -3,7 +3,7 @@
 _Last updated: 2026-09-17 (night)_
 
 ## Where it stands
-v2 high-end dark design plus SEO and accessibility pass, live on GitHub Pages at https://twomeypcrepair.github.io/dannystowing.net/. Gates G1 to G11 in GATES.md (structure, copy, NAP, skeleton, visual, live, SEO, footer credit, axe, keyboard, Lighthouse). Not yet on its own domain. Not yet shown to Danny. Vash is getting the domain once Danny approves the site.
+v2 high-end dark design plus SEO and accessibility pass, live on GitHub Pages at https://twomeypcrepair.github.io/dannystowing.net/. Gates G1 to G13 in GATES.md (structure, copy, NAP, skeleton, visual, live, SEO, footer credit, axe, keyboard, Lighthouse, holiday logic, holiday pill in browser). Automatic holiday greeting pill is live; preview with ?holiday=YYYY-MM-DD. Not yet on its own domain. Not yet shown to Danny. Vash is getting the domain once Danny approves the site.
 
 ## Facts carried over from dannysautobody.net (verified 2026-09-17 by reading the live site)
 - Phone (870) 994-2701, email dannysauto@centurytel.net, 7 Little Creek Cir, Ash Flat AR 72513, Mon to Fri 9 AM to 5 PM.

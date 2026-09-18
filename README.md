@@ -10,6 +10,13 @@ node scripts/check-site.mjs structure
 node scripts/check-site.mjs copy
 node scripts/check-site.mjs nap
 node scripts/check-site.mjs skeleton
+node scripts/check-site.mjs seo
+node scripts/check-site.mjs footer
+node scripts/check-site.mjs holidays
+node scripts/audit.mjs axe https://twomeypcrepair.github.io/dannystowing.net/
+node scripts/audit.mjs keyboard https://twomeypcrepair.github.io/dannystowing.net/
+node scripts/audit.mjs holiday https://twomeypcrepair.github.io/dannystowing.net/
+node scripts/audit.mjs lighthouse https://twomeypcrepair.github.io/dannystowing.net/
 node scripts/check-site.mjs live https://twomeypcrepair.github.io/dannystowing.net/
 ```
 

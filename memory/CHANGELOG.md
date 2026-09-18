@@ -16,11 +16,16 @@ dannystowing.net/
 ├── assets/d-mark.png    # red D from the old site (transparent PNG)
 ├── scripts/check-site.mjs   # structure, copy, nap, skeleton, seo, footer, live
 ├── scripts/audit.mjs        # axe, keyboard, lighthouse (headless Chrome over DevTools protocol)
-├── documentation/
+├── documentation/holiday-greetings.md
 └── memory/ (STATE, DECISIONS, CHANGELOG, LESSONS)
 ```
 
 ## Changes (newest first)
+
+### 2026-09-18 — Automatic holiday greeting
+- A second pill beside the location pill in the hero shows a greeting during 16 holiday windows and nothing the rest of the year. Logic is an inline script in index.html (id holiday-script), dates computed in the visitor browser, floating holidays by rule, Easter by the standard algorithm. No yearly upkeep.
+- Preview any date with ?holiday=YYYY-MM-DD on the URL.
+- Gates G12 (date logic against real 2026-2028 calendar dates, windows, overlap, tone, length) and G13 (real-browser show/hide, phone fit, axe with the pill showing). How-to in documentation/holiday-greetings.md.
 
 ### 2026-09-18 — Legal name
 - Brand changed from Danny's Towing to Danny's Auto sitewide (title, nav, footer, social tags, schema, 404, live check). Title keeps the word Towing.

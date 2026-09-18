@@ -1,6 +1,7 @@
 // Browser-driven audits over the DevTools protocol (needs Chrome on the machine).
 // node scripts/audit.mjs axe <url>         zero axe-core WCAG 2.2 AA violations at 1440 and 390 wide
 // node scripts/audit.mjs keyboard <url>    skip link first, every Tab stop has a visible focus ring
+// node scripts/audit.mjs holiday <url>     holiday pill shows on a holiday, hides off-season, fits a phone, axe-clean
 // node scripts/audit.mjs lighthouse <url>  mobile Lighthouse: seo 100, a11y 100, best-practices >= 90, performance >= 85
 import { spawn, execSync, spawnSync } from "node:child_process";
 import { mkdtempSync, readFileSync } from "node:fs";
@@ -35,10 +36,10 @@ async function withPage(fn) {
   const send = (method, params = {}) => new Promise((res, rej) => { const i = ++id; pending.set(i, { res, rej }); ws.send(JSON.stringify({ id: i, method, params })); });
   const waitEvent = (method) => new Promise((r) => waiters.set(method, r));
   const evalJs = async (expression) => { const r = await send("Runtime.evaluate", { expression, returnByValue: true, awaitPromise: true }); if (r.exceptionDetails) throw new Error(r.exceptionDetails.text + " " + (r.exceptionDetails.exception?.description || "")); return r.result.value; };
-  const open = async (width, height, mobile) => {
+  const open = async (width, height, mobile, target = url) => {
     await send("Emulation.setDeviceMetricsOverride", { width, height, deviceScaleFactor: 1, mobile });
     const loaded = waitEvent("Page.loadEventFired");
-    await send("Page.navigate", { url });
+    await send("Page.navigate", { url: target });
     await loaded;
     await evalJs("new Promise(r=>setTimeout(r,1200))");
   };
@@ -90,6 +91,40 @@ if (mode === "axe") {
     if (stops.length < expectedCount) fail(`only ${stops.length} of ${expectedCount} focusable elements were reached by Tab`);
     console.log(`${stops.length} Tab stops, all with focus rings`);
     console.log("keyboard check passed");
+  });
+} else if (mode === "holiday") {
+  // Preview switch drives the banner: shows on a holiday, hidden off-season, sober wording on Memorial Day, fits a phone, axe-clean while showing.
+  const axeSrc = await (await fetch("https://cdn.jsdelivr.net/npm/axe-core@4.10.2/axe.min.js")).text();
+  const sep = url.includes("?") ? "&" : "?";
+  const probe = "JSON.stringify((()=>{const e=document.getElementById('holiday'); const r=e.getBoundingClientRect(); return {hidden:e.hidden, shown:getComputedStyle(e).display!=='none', text:e.textContent, right:Math.round(r.right), sw:document.documentElement.scrollWidth, w:innerWidth}})())";
+  await withPage(async ({ evalJs, open }) => {
+    await open(1440, 900, false, url + sep + "holiday=2026-12-25");
+    let s = JSON.parse(await evalJs(probe));
+    console.log("christmas 1440:", JSON.stringify(s));
+    if (!s.shown || !/Merry Christmas/.test(s.text)) fail("Christmas banner did not show on 2026-12-25");
+    await open(1440, 900, false, url + sep + "holiday=2026-08-01");
+    s = JSON.parse(await evalJs(probe));
+    console.log("august 1440:", JSON.stringify(s));
+    if (s.shown || s.text) fail("banner showed on a non-holiday");
+    await open(1440, 900, false, url + sep + "holiday=2026-05-25");
+    s = JSON.parse(await evalJs(probe));
+    console.log("memorial 1440:", JSON.stringify(s));
+    if (!s.shown || /happy/i.test(s.text) || !/Memorial Day/.test(s.text)) fail("Memorial Day banner missing or says Happy");
+    let violations = 0;
+    for (const [w, h, mobile] of [[390, 844, true], [1440, 900, false]]) {
+      await open(w, h, mobile, url + sep + "holiday=2026-12-25");
+      await evalJs("document.querySelectorAll('.reveal').forEach(e=>e.classList.add('in')); 1");
+      s = JSON.parse(await evalJs(probe));
+      console.log(`christmas ${w}:`, JSON.stringify(s));
+      if (!s.shown) fail(`banner hidden at ${w}px`);
+      if (s.sw > s.w || s.right > s.w) fail(`banner overflows at ${w}px`);
+      await evalJs(axeSrc + "; 1");
+      const v = JSON.parse(await evalJs("axe.run(document, { runOnly: { type: 'tag', values: ['wcag2a','wcag2aa','wcag21a','wcag21aa','wcag22aa','best-practice'] } }).then(r => JSON.stringify(r.violations.map(v => v.id + ': ' + v.nodes.slice(0,2).map(n => n.target.join(' ')).join(' | '))))"));
+      for (const x of v) console.log("  axe:", x);
+      violations += v.length;
+    }
+    if (violations) fail(`${violations} axe violations with the banner showing`);
+    console.log("holiday banner check passed");
   });
 } else if (mode === "lighthouse") {
   const out = join(mkdtempSync(join(tmpdir(), "lh-")), "lh.json");
