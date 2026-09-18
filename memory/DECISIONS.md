@@ -11,7 +11,7 @@ Vash asked for a high-end look after v1. v2: near-black #070606, one red #FF2B2B
 v1 (paper, ink, Archivo Black, zero radius) lives in git history at commit 005c196 if the flat look is ever wanted back.
 
 ## 2026-09-17 — Photos are Unsplash hotlinks until Danny supplies his own
-No photos of Danny's trucks exist. Three Unsplash photos (license allows commercial use, credit in the footer): red Ford wrecker by ftodne (hero), night pickup by sebastiaanstam (bento), roadside red sedan by hectoroconnor (bento). Picked because none show another company's name on the truck. Swap for real photos of Danny's rig as soon as there are any; keep the same aspect ratios (11:13 hero, 3:4 tall cell, 9:7 wide cell).
+No photos of Danny's trucks exist. Three Unsplash photos (license allows commercial use, credit in the footer): red Ford wrecker by ftodne (hero), night pickup by sebastiaanstam (bento), flat-tire change by jairph (bento; replaced the first roadside photo, which read like a body slumped over a car door). Picked because none show another company's name on the truck. Swap for real photos of Danny's rig as soon as there are any; keep the same aspect ratios (11:13 hero, 3:4 tall cell, 9:7 wide cell).
 
 ## 2026-09-17 — Keep the old name on the page once
 "You might know us as Danny's Auto Body" stays in the about band. Locals know that name, and it carries the search equity. No other body-shop wording anywhere; the copy check enforces it.

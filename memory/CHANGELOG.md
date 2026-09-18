@@ -20,6 +20,7 @@ dannystowing.net/
 ## Changes (newest first)
 
 ### 2026-09-17 (later) — v2 high-end redesign
+- Photo swap after Vash review: the roadside red-sedan shot read like a body slumped over a car door. Replaced with a flat-tire change by jairph, credit updated.
 - Dark theme, red accent, Outfit + Geist + Geist Mono. Floating glass pill nav with phone pill. Hero split: chip, headline, lead, white pill CTA with red arrow circle, ghost CTA, double-bezel photo card (red wrecker).
 - Services as a 7-cell bento: night photo (tall), four text cells, roadside photo, red gradient call cell. Collapses to 6-col at tablet and single column on phones.
 - Towns as one CSS marquee (paused on hover, static under reduced motion). About statement in a bezel card with a red top glow. Contact split: heading + oversized phone link left, details card with Maps button right.
