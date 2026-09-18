@@ -12,7 +12,7 @@ v2 high-end dark design plus SEO and accessibility pass, live on GitHub Pages at
 - Notion has the email as dannysautobody@centurytel.net. The live site says dannysauto@. Went with the live site. Confirm with Danny.
 
 ## Needs Danny (assumptions to confirm, in the order they matter)
-1. Business name: went with "Danny's Towing". Legal/DBA name unknown.
+1. Business name: RESOLVED 2026-09-18. Legal name is "Danny's Auto" (from Vash). Site brand, title, schema and footer use it; "Danny's Towing" kept as a schema alternateName.
 2. Hours. Kept Mon to Fri 9 to 5 from the old site. If he runs after-hours or 24/7 calls, the page should say so. It currently makes no after-hours claim.
 3. Services listed: towing, wrecks, won't-start help (jump/gas/lockout), drop-off anywhere. Guessed from a normal towing operation. Cut anything he doesn't do.
 4. Email address (see above).

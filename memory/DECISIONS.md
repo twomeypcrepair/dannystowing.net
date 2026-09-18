@@ -21,3 +21,6 @@ GitHub Pages on a free org plan needs a public repo. The page content is the sam
 
 ## 2026-09-17 — Google Fonts via link tag
 Self-hosting fonts on a one-file site is more files for no gain. Link tag with display=swap. If it ever matters, download the three families into assets/.
+
+## 2026-09-18 — Business name is Danny's Auto (legal name)
+Vash confirmed the legal name. Title is "Danny's Auto | Towing in Ash Flat, AR | (870) 994-2701" so the word Towing stays in the title for search. Nav brand, footer, og:site_name, og:title, meta description, JSON-LD name and the 404 page all use Danny's Auto. JSON-LD alternateName lists Danny's Towing and the old Auto Body name. The domain stays dannystowing.net.

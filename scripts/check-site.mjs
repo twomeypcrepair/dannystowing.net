@@ -106,7 +106,7 @@ if (mode === "structure") {
   const res = await fetch(url, { redirect: "follow" });
   if (res.status !== 200) fail(`status ${res.status}`);
   const body = await res.text();
-  if (!body.includes("Danny's Towing") && !body.includes("Danny&#39;s Towing")) fail("body does not name Danny's Towing");
+  if (!body.includes("Danny's Auto") && !body.includes("Danny&#39;s Auto")) fail("body does not name Danny's Auto");
   if (!body.includes(`tel:+1${NAP.phoneDigits}`)) fail("body has no phone link");
   console.log("live check passed");
 } else {
