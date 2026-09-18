@@ -1,4 +1,4 @@
-// Gate oracle for GATES.md. Usage: node scripts/check-site.mjs <structure|copy|nap|skeleton|live [url]>
+// Gate oracle for GATES.md. Usage: node scripts/check-site.mjs <structure|copy|nap|skeleton|seo|footer|live [url]>
 import { readFileSync, existsSync } from "node:fs";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -6,13 +6,15 @@ import { fileURLToPath } from "node:url";
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const mode = process.argv[2];
 const fail = (msg) => { console.error("FAIL: " + msg); process.exit(1); };
-const html = () => readFileSync(resolve(root, "index.html"), "utf8");
+const read = (f) => readFileSync(resolve(root, f), "utf8");
+const html = () => read("index.html");
 const text = (h) => h.replace(/<script[\s\S]*?<\/script>/gi, "").replace(/<style[\s\S]*?<\/style>/gi, "").replace(/<[^>]+>/g, " ");
 const jsonld = (h) => {
   const m = h.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/);
   if (!m) fail("no JSON-LD block");
   return JSON.parse(m[1]);
 };
+const meta = (h, attr, name) => h.match(new RegExp(`<meta ${attr}="${name}" content="([^"]*)"`))?.[1];
 
 const NAP = {
   phoneDigits: "8709942701",
@@ -61,9 +63,43 @@ if (mode === "structure") {
 } else if (mode === "skeleton") {
   for (const f of ["README.md", "AGENTS.md", "CLAUDE.md", ".gitignore", "memory/STATE.md", "memory/DECISIONS.md", "memory/CHANGELOG.md", "memory/LESSONS.md", "index.html", "style.css", "assets/d-mark.png"])
     if (!existsSync(resolve(root, f))) fail("missing " + f);
-  const gi = readFileSync(resolve(root, ".gitignore"), "utf8");
+  const gi = read(".gitignore");
   if (!/^CLAUDE\.md$/m.test(gi)) fail("CLAUDE.md not gitignored (public repo)");
   console.log("skeleton check passed");
+} else if (mode === "seo") {
+  const h = html();
+  const title = h.match(/<title>([^<]*)<\/title>/)?.[1] || "";
+  if (title.length < 20 || title.length > 60) fail(`title length ${title.length}, want 20-60`);
+  const desc = meta(h, "name", "description") || "";
+  if (desc.length < 50 || desc.length > 160) fail(`description length ${desc.length}, want 50-160`);
+  if (!/<html lang="en">/.test(h)) fail("html lang missing");
+  const canonical = h.match(/<link rel="canonical" href="([^"]+)">/)?.[1];
+  if (!canonical || !/^https:\/\/[^ ]+\/$/.test(canonical)) fail("canonical missing or not an absolute URL ending in /");
+  for (const p of ["og:type", "og:site_name", "og:url", "og:title", "og:description", "og:image", "og:image:alt"]) if (!meta(h, "property", p)) fail("missing " + p);
+  if (meta(h, "property", "og:url") !== canonical) fail("og:url differs from canonical");
+  if (meta(h, "name", "twitter:card") !== "summary_large_image") fail("twitter:card missing");
+  if (jsonld(h).url !== canonical) fail("JSON-LD url differs from canonical");
+  const levels = [...h.matchAll(/<h([1-6])[\s>]/g)].map((m) => +m[1]);
+  if (levels[0] !== 1) fail("first heading is not h1");
+  for (let i = 1; i < levels.length; i++) if (levels[i] > levels[i - 1] + 1) fail(`heading level skips from h${levels[i - 1]} to h${levels[i]}`);
+  const imgs = [...h.matchAll(/<img\b[^>]*>/g)].map((m) => m[0]);
+  for (const tag of imgs) if (!/\balt="/.test(tag)) fail("img without alt: " + tag.slice(0, 80));
+  if (!existsSync(resolve(root, "sitemap.xml"))) fail("sitemap.xml missing");
+  const sm = read("sitemap.xml");
+  if (!sm.includes("<loc>" + canonical + "</loc>")) fail("sitemap does not list the canonical URL");
+  if (!/<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/.test(sm)) fail("sitemap lastmod missing");
+  const robots = read("robots.txt");
+  if (!robots.includes("Sitemap: " + canonical + "sitemap.xml")) fail("robots.txt has no Sitemap line for the canonical host");
+  if (!existsSync(resolve(root, "404.html"))) fail("404.html missing");
+  if (!/name="robots" content="noindex"/.test(read("404.html"))) fail("404.html is not noindex");
+  console.log("seo check passed");
+} else if (mode === "footer") {
+  const h = html();
+  const footer = h.match(/<footer>[\s\S]*?<\/footer>/)?.[0] || "";
+  if (!/<a [^>]*href="https:\/\/twomeypcrepair\.com"[^>]*>Built by Twomey PC Repair<\/a>/.test(footer)) fail("footer lacks the Built by Twomey PC Repair link");
+  if (/unsplash/i.test(text(h))) fail("visible page text still mentions Unsplash");
+  if (/@ftodne|@sebastiaanstam|@jairph|@hectoroconnor/.test(h)) fail("photographer credit links still present");
+  console.log("footer check passed");
 } else if (mode === "live") {
   const url = process.argv[3];
   if (!url) fail("live needs a url");

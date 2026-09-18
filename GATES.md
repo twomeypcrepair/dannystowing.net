@@ -31,3 +31,28 @@ Scope: a one-page static GitHub Pages site for Danny's Towing (towing only, body
   CHECK: node scripts/check-site.mjs live https://twomeypcrepair.github.io/dannystowing.net/
   EXPECT: live check passed
   EVIDENCE: automatic-evidence=v1; definition-sha256=9f148ed28693f8f22f368ab048e86f083d50b4b8de07c8007dc6721771b90a2b; exit=0; EXPECT=matched; output-sha256=b3b66deb4e2f35d8e64e3c7b5991312e1bd57f76fffd0629b057353f1f96d497; output-bytes=18; shell=C:\WINDOWS\system32\cmd.exe; cwd=C:\TwomeyRepo\websites\dannystowing.net; path=d9662ebded43/37 entries
+
+- [ ] G7: SEO structure is complete: title 20-60 chars, description 50-160, canonical, full Open Graph set with og:url equal to canonical, Twitter card, JSON-LD url equal to canonical, heading levels never skip, every img has alt, sitemap.xml lists the canonical with lastmod, robots.txt points at the sitemap, noindex 404 page
+  CHECK: node scripts/check-site.mjs seo
+  EXPECT: seo check passed
+  EVIDENCE: pending
+
+- [ ] G8: footer carries a Built by Twomey PC Repair link to twomeypcrepair.com and no photo credits remain
+  CHECK: node scripts/check-site.mjs footer
+  EXPECT: footer check passed
+  EVIDENCE: pending
+
+- [ ] G9: axe-core reports zero WCAG 2.2 AA and best-practice violations at 1440 and 390 wide on the live page
+  CHECK: node scripts/audit.mjs axe https://twomeypcrepair.github.io/dannystowing.net/
+  EXPECT: axe check passed
+  EVIDENCE: pending
+
+- [ ] G10: keyboard: first Tab stop is the skip link, every Tab stop shows a visible focus ring and is at least 24x24, every focusable element is reached
+  CHECK: node scripts/audit.mjs keyboard https://twomeypcrepair.github.io/dannystowing.net/
+  EXPECT: keyboard check passed
+  EVIDENCE: pending
+
+- [ ] G11: Lighthouse mobile on the live page scores seo 100, accessibility 100, best-practices at least 90, performance at least 85 (run the checker with --timeout 600)
+  CHECK: node scripts/audit.mjs lighthouse https://twomeypcrepair.github.io/dannystowing.net/
+  EXPECT: lighthouse check passed
+  EVIDENCE: pending

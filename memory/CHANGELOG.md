@@ -4,29 +4,37 @@
 ```
 dannystowing.net/
 ├── .gitignore
+├── 404.html             # noindex, links home and the phone
 ├── AGENTS.md
 ├── CLAUDE.md            # gitignored
-├── GATES.md             # acceptance ledger (unlazy)
+├── GATES.md             # acceptance ledger (unlazy), G1-G11
 ├── README.md
 ├── index.html           # the whole site (inline reveal script at the bottom)
+├── robots.txt           # + Sitemap line
+├── sitemap.xml
 ├── style.css
-├── robots.txt
 ├── assets/d-mark.png    # red D from the old site (transparent PNG)
-├── scripts/check-site.mjs
+├── scripts/check-site.mjs   # structure, copy, nap, skeleton, seo, footer, live
+├── scripts/audit.mjs        # axe, keyboard, lighthouse (headless Chrome over DevTools protocol)
 ├── documentation/
 └── memory/ (STATE, DECISIONS, CHANGELOG, LESSONS)
 ```
 
 ## Changes (newest first)
 
+### 2026-09-17 (night) — SEO + accessibility pass, footer credit
+- Footer: photo credits removed (Unsplash license does not require them; kept in DECISIONS), replaced with a "Built by Twomey PC Repair" link.
+- SEO: canonical, og:url, og:site_name, og:image:alt, Twitter card, JSON-LD gains description, image and hasMap, sitemap.xml, robots.txt Sitemap line, noindex 404.html. Canonical is the github.io URL until the domain lands (see STATE cutover list).
+- Accessibility: skip link, global focus-visible ring (3px red, offset), nav links padded to 40px tall for target size, aria-labels on the brand link, site nav and every section, main is focusable for the skip link, mobile call bar moved inside the footer landmark (axe region rule), decoding=async on images.
+- New gates G7-G11 and `scripts/audit.mjs`: axe-core 4.10 at 1440 and 390 (zero violations), Tab-order audit (skip link first, 13 stops, all with rings, all at least 24px tall), Lighthouse 12 mobile thresholds.
+- Photo swap after Vash review: the roadside red-sedan shot read like a body slumped over a car door. Replaced with a flat-tire change.
+
 ### 2026-09-17 (later) — v2 high-end redesign
-- Photo swap after Vash review: the roadside red-sedan shot read like a body slumped over a car door. Replaced with a flat-tire change by jairph, credit updated.
 - Dark theme, red accent, Outfit + Geist + Geist Mono. Floating glass pill nav with phone pill. Hero split: chip, headline, lead, white pill CTA with red arrow circle, ghost CTA, double-bezel photo card (red wrecker).
 - Services as a 7-cell bento: night photo (tall), four text cells, roadside photo, red gradient call cell. Collapses to 6-col at tablet and single column on phones.
 - Towns as one CSS marquee (paused on hover, static under reduced motion). About statement in a bezel card with a red top glow. Contact split: heading + oversized phone link left, details card with Maps button right.
 - Scroll reveals (fade, lift, un-blur) via IntersectionObserver, staggered by --i. Everything visible when JS is off or reduced motion is on.
 - Fixed floating red call pill on phones. Grain overlay and two radial red orbs (plain gradients, no filter blur, to keep phones smooth).
-- Photo credits in the footer. og:image points at the hero photo.
 - Fixes found in review: nav width max-content (was shrink-fitting into half the viewport at tablet width and losing its gaps), tablet bento CTA span 3 so no empty half row, marquee separators as thin bars not dots.
 
 ### 2026-09-17 — Initial build

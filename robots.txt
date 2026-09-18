@@ -1,2 +1,3 @@
 User-agent: *
 Allow: /
+Sitemap: https://twomeypcrepair.github.io/dannystowing.net/sitemap.xml

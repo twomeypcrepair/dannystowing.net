@@ -31,6 +31,15 @@ body {
 }
 a { color: inherit; }
 img { display: block; max-width: 100%; height: auto; }
+:focus-visible { outline: 3px solid var(--red); outline-offset: 3px; }
+main:focus { outline: none; }
+.skip {
+  position: absolute; left: 1rem; top: -100px; z-index: 50;
+  padding: 0.7rem 1.25rem; border-radius: 999px;
+  background: var(--text); color: #0b0a0a; text-decoration: none;
+  font-family: var(--display); font-weight: 700;
+}
+.skip:focus { top: 1rem; }
 h1, h2, h3 { font-family: var(--display); margin: 0; letter-spacing: -0.03em; }
 h1 { font-weight: 800; font-size: clamp(2.75rem, 5.2vw, 5.25rem); line-height: 0.98; }
 h2 { font-weight: 700; font-size: clamp(2.25rem, 4.2vw, 3.75rem); line-height: 1.02; }
@@ -66,7 +75,7 @@ main, footer, .nav { position: relative; z-index: 1; }
 }
 .brand { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; font-family: var(--display); font-weight: 700; font-size: 1rem; letter-spacing: -0.01em; }
 .links { display: flex; gap: 1.25rem; font-size: 0.9375rem; color: var(--muted); }
-.links a { text-decoration: none; transition: color 300ms var(--ease); }
+.links a { text-decoration: none; padding: 0.5rem 0; transition: color 300ms var(--ease); }
 .links a:hover { color: var(--text); }
 .nav-call {
   font-family: var(--mono); font-size: 0.9rem; font-weight: 500; text-decoration: none;
@@ -228,7 +237,8 @@ footer {
   border-top: 1px solid var(--line);
   font-size: 0.85rem; color: var(--muted);
 }
-.credits a { color: var(--muted); }
+.built { color: var(--muted); text-decoration: none; padding: 0.25rem 0; border-bottom: 1px solid var(--line-strong); }
+.built:hover { color: var(--text); border-color: var(--text); }
 
 /* mobile call bar */
 .call-bar {
