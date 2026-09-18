@@ -12,3 +12,6 @@ What worked: a 60-line Node script driving headless Chrome over the DevTools pro
 
 ## 2026-09-17 — Fixed element at left:50% shrink-fits to half the viewport
 A `position:fixed; left:50%; transform:translateX(-50%)` nav with no explicit width gets shrink-to-fit sizing against the space to the right of 50%, so at tablet widths it clamped and its flex gaps collapsed (brand ran into the links). `width: max-content` fixes it.
+
+## 2026-09-17 — Lighthouse CLI on Windows exits 1 after a successful run
+chrome-launcher fails with EPERM deleting its temp profile while Chrome is still closing, so `npx lighthouse` returns exit 1 even though the JSON report was written. scripts/audit.mjs reads the report if it exists and ignores the exit code. Also: the app browser pane caches style.css across reloads on the local python server; force it with fetch(url, {cache: "reload"}) then location.reload() before trusting font or CSS checks there.

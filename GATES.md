@@ -32,25 +32,25 @@ Scope: a one-page static GitHub Pages site for Danny's Towing (towing only, body
   EXPECT: live check passed
   EVIDENCE: automatic-evidence=v1; definition-sha256=9f148ed28693f8f22f368ab048e86f083d50b4b8de07c8007dc6721771b90a2b; exit=0; EXPECT=matched; output-sha256=b3b66deb4e2f35d8e64e3c7b5991312e1bd57f76fffd0629b057353f1f96d497; output-bytes=18; shell=C:\WINDOWS\system32\cmd.exe; cwd=C:\TwomeyRepo\websites\dannystowing.net; path=d9662ebded43/37 entries
 
-- [ ] G7: SEO structure is complete: title 20-60 chars, description 50-160, canonical, full Open Graph set with og:url equal to canonical, Twitter card, JSON-LD url equal to canonical, heading levels never skip, every img has alt, sitemap.xml lists the canonical with lastmod, robots.txt points at the sitemap, noindex 404 page
+- [x] G7: SEO structure is complete: title 20-60 chars, description 50-160, canonical, full Open Graph set with og:url equal to canonical, Twitter card, JSON-LD url equal to canonical, heading levels never skip, every img has alt, sitemap.xml lists the canonical with lastmod, robots.txt points at the sitemap, noindex 404 page
   CHECK: node scripts/check-site.mjs seo
   EXPECT: seo check passed
-  EVIDENCE: pending
+  EVIDENCE: automatic-evidence=v1; definition-sha256=c9b242197788bb85fb212c46b115fcd7dfa460b6791da7ce8770612ba4638fed; exit=0; EXPECT=matched; output-sha256=c5881f2c13c6be13114adcfd1e7695c8c52a79f205a96ede81edb8bcf655c9c5; output-bytes=17; shell=C:\WINDOWS\system32\cmd.exe; cwd=C:\TwomeyRepo\websites\dannystowing.net; path=d9662ebded43/37 entries
 
-- [ ] G8: footer carries a Built by Twomey PC Repair link to twomeypcrepair.com and no photo credits remain
+- [x] G8: footer carries a Built by Twomey PC Repair link to twomeypcrepair.com and no photo credits remain
   CHECK: node scripts/check-site.mjs footer
   EXPECT: footer check passed
-  EVIDENCE: pending
+  EVIDENCE: automatic-evidence=v1; definition-sha256=a50e4b948b775dfa560b918b6d548bf158db899e5bd95349a1688b711f225fd5; exit=0; EXPECT=matched; output-sha256=5533e9ec33436c5b2c99456b471690df3e730d15999c186eb32f890306d9b4e5; output-bytes=20; shell=C:\WINDOWS\system32\cmd.exe; cwd=C:\TwomeyRepo\websites\dannystowing.net; path=d9662ebded43/37 entries
 
-- [ ] G9: axe-core reports zero WCAG 2.2 AA and best-practice violations at 1440 and 390 wide on the live page
+- [x] G9: axe-core reports zero WCAG 2.2 AA and best-practice violations at 1440 and 390 wide on the live page
   CHECK: node scripts/audit.mjs axe https://twomeypcrepair.github.io/dannystowing.net/
   EXPECT: axe check passed
-  EVIDENCE: pending
+  EVIDENCE: automatic-evidence=v1; definition-sha256=9606135369c157324ae8d2c1e7c30839838a598b2414a9896ba19451a2dc4168; exit=0; EXPECT=matched; output-sha256=8cac6f7f301599e0215d7ede188d5cce5e615d51e488005ef6c8df5f8df0bce5; output-bytes=92; shell=C:\WINDOWS\system32\cmd.exe; cwd=C:\TwomeyRepo\websites\dannystowing.net; path=d9662ebded43/37 entries
 
-- [ ] G10: keyboard: first Tab stop is the skip link, every Tab stop shows a visible focus ring and is at least 24x24, every focusable element is reached
+- [x] G10: keyboard: first Tab stop is the skip link, every Tab stop shows a visible focus ring and is at least 24x24, every focusable element is reached
   CHECK: node scripts/audit.mjs keyboard https://twomeypcrepair.github.io/dannystowing.net/
   EXPECT: keyboard check passed
-  EVIDENCE: pending
+  EVIDENCE: automatic-evidence=v1; definition-sha256=7fe5b8bc7897515af483e01107b30575442eac2f6e0c515a7d7022323767411c; exit=0; EXPECT=matched; output-sha256=1dcb22a81241e4987c264c326b56830c2884cac5c0563505f1a09b8f87938384; output-bytes=1016; shell=C:\WINDOWS\system32\cmd.exe; cwd=C:\TwomeyRepo\websites\dannystowing.net; path=d9662ebded43/37 entries
 
 - [ ] G11: Lighthouse mobile on the live page scores seo 100, accessibility 100, best-practices at least 90, performance at least 85 (run the checker with --timeout 600)
   CHECK: node scripts/audit.mjs lighthouse https://twomeypcrepair.github.io/dannystowing.net/

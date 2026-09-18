@@ -95,8 +95,9 @@ if (mode === "axe") {
   const out = join(mkdtempSync(join(tmpdir(), "lh-")), "lh.json");
   const args = ["-y", "lighthouse@12.6.1", url, "--output=json", "--output-path=" + out, "--quiet", "--chrome-flags=--headless=new --no-first-run", "--only-categories=performance,accessibility,best-practices,seo"];
   const r = spawnSync(process.platform === "win32" ? "npx.cmd" : "npx", args, { stdio: ["ignore", "inherit", "inherit"], shell: process.platform === "win32" });
-  if (r.status !== 0) fail("lighthouse exited " + r.status);
-  const lhr = JSON.parse(readFileSync(out, "utf8"));
+  // chrome-launcher on Windows sometimes exits 1 while deleting its temp profile after a finished run; trust the report if it was written.
+  let raw; try { raw = readFileSync(out, "utf8"); } catch { fail("lighthouse exited " + r.status + " and wrote no report"); }
+  const lhr = JSON.parse(raw);
   const score = (c) => Math.round(lhr.categories[c].score * 100);
   const s = { performance: score("performance"), accessibility: score("accessibility"), "best-practices": score("best-practices"), seo: score("seo") };
   console.log("lighthouse (mobile):", JSON.stringify(s));
